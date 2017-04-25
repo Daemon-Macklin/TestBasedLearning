@@ -1,33 +1,45 @@
+import java.util.Date;
+import java.util.HashMap;
 
 public class StudentMember extends Member {
 	
 	private String studentId;
 	private String collegeName;
+	private String chosenPackage;
 	
-	public StudentMember(String email, String name, String address, String gender){
+	public StudentMember(String email, String name, String address, String gender, double height, double weight, String studentId, String collegeName,String chosenPackage){
 		
-		super(email, name, address, gender);
-		this.setChosenPackage(collegeName);
+		super(email, name, address, gender, height, weight);
 		this.setCollegeName(collegeName);
 		this.setStudentId(studentId);
+		this.setChosenPackage(chosenPackage);
 		
 	}
 	
-	public void setChosenPackage(String collegeName){
-		// Check to see if college is in package hash map
-		collegeName = this.collegeName;
+	@Override
+	public String toString() {
+		return super.toString() + ", StudentId=" + this.getStudentId() + 
+	            " , College Name=" + this.getCollegeName() + 
+	            ", Chosen Package=" + this.getChosenPackage()
+	            + "]" ;        
 	}
-	
-	public String getChoisePackage(){
-		return this.collegeName;
-	}
-	
+
 	public void setStudentId(String studentId){
-		studentId = this.studentId;
+		int maxLength = (studentId.length() < 6)?studentId.length():6;
+		studentId = studentId.substring(0, maxLength);
+		this.studentId = studentId;
 	}
 	
 	public void setCollegeName(String collegeName){
-		collegeName = this.collegeName;
+		this.collegeName = collegeName;
+	}
+	
+	public void setChosenPackage(String chosenPackage){
+		this.chosenPackage = chosenPackage;
+	}
+	
+	public String getChosenPackage(){
+		return this.chosenPackage;
 	}
 	
 	public String getStudentId(){
@@ -36,5 +48,9 @@ public class StudentMember extends Member {
 	
 	public String getCollegeName(){
 		return this.collegeName;
+	}
+
+	public void setAssessments(HashMap<Date, Assessment> assessments) {
+	 	
 	}
 }

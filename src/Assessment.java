@@ -12,6 +12,17 @@ public class Assessment {
 	private String comment;
 	private Trainer trainer;
 	
+	public Assessment(double weight, double chest, double thigh, double upperArm, double waist, double hips, String comment, Trainer trainer){
+		this.setWeight(weight);
+		this.setChest(chest);
+		this.setThigh(thigh);
+		this.setUpperArm(upperArm);
+		this.setWaist(waist);
+		this.setHips(hips, waist);
+		this.setComment(comment);
+		this.setTrainer(trainer);
+	}
+	
 	public double getWeight() {
 		return weight;
 	}

@@ -10,11 +10,32 @@ public abstract class Person {
 	private String gender; 
 	
 	public Person(String email, String name, String address, String gender){
-		
+		this.setEmail(email);
+		this.setName(name);
+		this.setAddress(address);
+		this.setGender(gender);
+	}
+	
+	public String toString(){
+	return ("StudentMember [" +
+			"Email: " + this.getEmail() + 
+			", Name:" + this.getName() + 
+			" (" + this.getGender() + ")" + 
+			", Address:" + this.getAddress() + "."); 
 	}
 	
 	public void setName(String name){
+		if(this.name == null){
+		int maxLength = (name.length() < 30)?name.length():30;
+		name = name.substring(0, maxLength);
 		this.name = name;
+		}
+		else{
+			if(name.length() < 30){
+				this.name = name;
+			}
+		}
+		
 	}
 	
 	public void setEmail(String email){
@@ -26,7 +47,29 @@ public abstract class Person {
 	}
 	
 	public void setGender(String gender){
-		this.gender = gender;
+		if(this.gender == null){
+		String finalgender = "";
+		if((gender == "m") || (gender == "M") || (gender == "male") || (gender == "Male")){
+			finalgender = "M";
+		}
+		else if((gender == "f") || (gender == "F") || (gender == "female") || (gender == "Female")){
+			finalgender = "F";
+		}
+		else{
+			finalgender = "Unspecified";
+		}
+		this.gender = finalgender;
+		}
+		else{
+			String finalgender = this.gender;
+			if((gender == "m") || (gender == "M") || (gender == "male") || (gender == "Male")){
+				finalgender = "M";
+			}
+			else if((gender == "f") || (gender == "F") || (gender == "female") || (gender == "Female")){
+				finalgender = "F";
+			}
+			this.gender = finalgender;
+		}
 	}
 	
 	public String getName(){

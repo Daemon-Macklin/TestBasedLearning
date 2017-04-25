@@ -7,15 +7,19 @@ public abstract class Member extends Person {
 	
 	private double height;
 	private double startingWeight;
-	private String packageChosen;
-	private HashMap <String, String> Assessment; 
+	private HashMap <Date, Assessment> assessments; 
 	// hash map to record members progress(from trainers)
  
-	public Member(String email, String name, String address, String gender){
-		
+	public Member(String email, String name, String address, String gender, double height, double startingWeight){	
 		super(email, name, address, gender);
 		this.setHeight(height);
 		this.setStartingWeight(startingWeight);
+	}
+	
+	public String toString(){
+		return super.toString() +
+				"\n\tHeight: "+ this.getHeight() + " metres" +
+	            ",  Starting Weight: " + this.getStartingWeight() + " kgs";
 	}
 	
 	public double calculateBMI(double weight){
@@ -55,26 +59,46 @@ public abstract class Member extends Person {
 	}
 	
 	public Assessment latestAssessment(){
-		//Returns lastest assessment based on last entry 
+		//Returns latest assessment based on last entry 
 		return getAssessments().get(sortedAssessmentDates().last());
 	}
 		
 	public SortedSet<Date> sortedAssessmentDates(){
 		//Returns the assessment dates sorted in date order
-		return new TreeSet<Date>(getAssessments()keySet());
+		return new TreeSet<Date>(getAssessments().keySet());
 	}
 	
 	public void setHeight(double height){
+		if(this.height ==0){
 		if(height > 1 && height < 3){
-		height = this.height;
+		this.height = height;
+		}
+		else{
+			this.height = 1;
+		}
+		}
+		else{
+			if(height > 1 && height < 3){
+				this.height = height;
+			}
 		}
 	}
 	
 	public void setStartingWeight(double startingWeight){
-		if(startingWeight > 30 && startingWeight < 250){
-		startingWeight = this.startingWeight;
+		if(this.startingWeight == 0){
+		if(startingWeight > 35 && startingWeight < 250){
+		this.startingWeight = startingWeight;
 		}
-	}
+		else{
+			this.startingWeight = 35;
+		}
+		}
+		else{
+			if(startingWeight > 35 && startingWeight < 250){
+				this.startingWeight = startingWeight;
+				}
+		}
+		}
 	
 	public double getHeight(){
 		return height;
@@ -85,7 +109,7 @@ public abstract class Member extends Person {
 		return startingWeight;
 	}
 	
-	public HashMap<String, String> getAssessments(){
-		return Assessment;
+	public HashMap<Date, Assessment> getAssessments(){
+		return assessments;
 	}
 }

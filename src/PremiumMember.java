@@ -1,20 +1,24 @@
 
 public class PremiumMember extends Member {
 	
-	private String packageChoice;
-	
-	public PremiumMember(String email, String name, String address, String gender){
+	private String packageChosen;
+
+
+	public PremiumMember(String email, String name, String address, String gender, double height, double weight, String packageChosen){
 		
-		super(email, name, address, gender);
-		this.setChosenPackage(packageChoice);
+		super(email, name, address, gender, height, weight);
+		this.setPackageChosen(packageChosen);
 		
 	}
 	
-	public void setChosenPackage(String packageChoice){
-		packageChoice = this.packageChoice;
+	
+	public String getPackageChosen() {
+		return packageChosen;
+	}
+
+
+	public void setPackageChosen(String packageChosen) {
+		this.packageChosen = packageChosen;
 	}
 	
-	public String getChosenPackage(){
-		return packageChoice;
-	}
 }

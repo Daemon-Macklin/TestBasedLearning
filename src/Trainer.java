@@ -3,7 +3,7 @@ public class Trainer extends Person{
 	
 	private String speciality;
 
-	public Trainer(String email, String name, String address, String gender, String specility){
+	public Trainer(String email, String name, String address, String gender, String speciality){
 		
 		super(email, name, address, gender);
 		this.setSpeciality(speciality); 
@@ -17,4 +17,7 @@ public class Trainer extends Person{
 		return speciality; 
 	}
 	
+	public String toString(){
+	return super.toString() +  ", Speciality:" + this.getSpeciality();
+	}
 }
