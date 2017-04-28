@@ -1,3 +1,9 @@
+/**
+ * Trainer Class
+ * 
+ * @author Daemon-Macklin 20075689
+ *
+ */
 
 public class Trainer extends Person{
 	

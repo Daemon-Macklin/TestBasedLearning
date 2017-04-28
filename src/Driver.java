@@ -1,3 +1,10 @@
+/**
+ * Driver Class
+ * 
+ * @author Daemon-Macklin
+ *
+ */
+
 import java.util.Scanner;
 
 public class Driver {
@@ -95,6 +102,7 @@ public class Driver {
 		while(!valid){
 		String email = "";
 		System.out.println("Please enter your Email");
+		getStringOption();
 		email = getStringOption();
 		Trainer trainer = (Trainer) gymApi.searchTrainersByEmail(email);
 		if(trainer == null){
@@ -113,8 +121,9 @@ public class Driver {
 		while(!valid){
 		String email = "";
 		System.out.println("Please enter your Email");
+		getStringOption();
 		email = getStringOption();
-		Member member = gymApi.searchMembersByEmail(email);
+		Member member = (Member) gymApi.searchMembersByEmail(email);
 		if(member == null){
 			System.out.println("Access denied");
 		}
@@ -161,8 +170,8 @@ public class Driver {
 	
 	public void registerTrainer(){
 		System.out.println("email");
-		String email = getStringOption();
 		getStringOption();
+		String email = getStringOption();
 		
 		System.out.println("Name");
 		String name = getStringOption();
@@ -170,19 +179,46 @@ public class Driver {
 		System.out.println("Address");
 		String address = getStringOption();
 		
-		System.out.println("Gender(M/F)");
-		String gender = getStringOption();
+		System.out.println("Gender");
+		int genderOption;
+		System.out.println("Gender");
+		System.out.println(" 1) Male");
+		System.out.println(" 2 Female");
+		System.out.println(" 3) Other");
+		genderOption = 0;
+		String gender = "U";
+		while(genderOption < 1 || genderOption > 3){
+			genderOption = getIntOption();
+			if(genderOption > 1 || genderOption < 3){
+				if(genderOption == 1){
+					gender = "M";
+				}
+				else if(genderOption == 2){
+					gender = "F";
+				}
+				else if(genderOption == 3){
+					gender = "U";
+				}
+			}
+		}
 		
+		getStringOption();
 		System.out.println("Speciality");
 		String specility = getStringOption();
 		
 		gymApi.addTrainer(new Trainer(email, name, address, gender, specility));
+		try {
+			gymApi.save();
+		} catch (Exception e) {
+			System.out.println("Error while saving");
+		}
 		this.loginTrainer();
 	}
 	
 	public void registerMember(){
 		System.out.println("----Register Member----");
 		getStringOption();
+		
 		System.out.println("email");
 		String email = getStringOption();
 		
@@ -192,8 +228,28 @@ public class Driver {
 		System.out.println("Address");
 		String address = getStringOption();
 		
-		System.out.println("Gender(M/F)");
-		String gender = getStringOption();
+		int genderOption;
+		System.out.println("Gender");
+		System.out.println(" 1) Male");
+		System.out.println(" 2 Female");
+		System.out.println(" 3) Other");
+		genderOption = 0;
+		String gender = "U";
+		while(genderOption < 1 || genderOption > 3){
+			genderOption = getIntOption();
+			if(genderOption > 1 || genderOption < 3){
+				if(genderOption == 1){
+					gender = "M";
+				}
+				else if(genderOption == 2){
+					gender = "F";
+				}
+				else if(genderOption == 3){
+					gender = "U";
+				}
+			}
+		}
+				
 		
 		System.out.println("Height(Between 1-3 meters");
 		double height = getDoubleOption();
@@ -201,15 +257,15 @@ public class Driver {
 		System.out.println("Starting Weight");
 		double weight = getDoubleOption();
 		
-		int option;
-		System.out.println("Student Member or Permium Member?");
+		int memberOption;
+		System.out.println("Student Member or Premium Member?");
 		System.out.println(" 1) Student Member");
-		System.out.println(" 2) Permium Member");
-		option = 0;
-		while(option < 1 || option > 2){
-			option = getIntOption();
-			if(option > 1 || option < 2){
-				if(option == 1){
+		System.out.println(" 2) Premium Member");
+		memberOption = 0;
+		while(memberOption < 1 || memberOption > 2){
+			memberOption = getIntOption();
+			if(memberOption > 1 || memberOption < 2){
+				if(memberOption == 1){
 					System.out.println("----Student Member----");
 					getStringOption();
 					System.out.println("Student ID");
@@ -220,12 +276,17 @@ public class Driver {
 					
 					gymApi.addMember(new StudentMember(email, name, address, gender, height, weight, studentId, collegeName, collegeName));
 				}
-				else if(option == 2){
+				else if(memberOption == 2){
 					String chosenPackage = runPackage();
 					
 					gymApi.addMember(new PremiumMember(email, name, address, gender, height, weight, chosenPackage));
 				}
 			}
+		}
+		try {
+			gymApi.save();
+		} catch (Exception e) {
+			System.out.println("Error while saving");
 		}
 		return;
 	}
@@ -276,10 +337,11 @@ public class Driver {
 		System.out.println(" 5) Search Member by email");
 		System.out.println(" 6) Add an assessment for a member");
 		System.out.println(" 7) View assessments");
+		System.out.println(" 8) Exit");
 		option = 0;
-		while(option < 1 || option > 7){
+		while(option < 1 || option > 8){
 			option = getIntOption();
-			if(option < 1 || option > 7){
+			if(option < 1 || option > 8){
 				this.optionError();
 			}
 		}
@@ -291,38 +353,102 @@ public class Driver {
 		
 		switch(option){
 		case 1:
+			// register member
 			registerMember();
 			runTrainerMenu(trainer);
 				break;
 		case 2:
-			gymApi.listMembers();
+			// List members
+			System.out.println(gymApi.listMembers());
 			getStringOption();
 			runTrainerMenu(trainer);
 			 break;
 		case 3:
-			gymApi.listMembersWithIdealWeight();
+			// List members with Ideal weight
+			System.out.println(gymApi.listMembersWithIdealWeight());
 			getStringOption();
 			runTrainerMenu(trainer);
 			break;
 		case 4:
 			//List members with bmi category
 			String category = runCategoryMenu();
-			gymApi.listMembersBySpecificeBMICategory(category);
+			System.out.println(gymApi.listMembersBySpecificeBMICategory(category));
 			getStringOption();
 			runTrainerMenu(trainer);
 			break;
 		case 5:
 			//search members by email
+			System.out.println("Please enter Email");
+			String email = getStringOption();
+			gymApi.searchMembersByEmail(email);
+			getStringOption();
+			runTrainerMenu(trainer);
 			break;
 		case 6:
 			//add assessment
+			addAssessment(trainer);
+			runTrainerMenu(trainer);
 			break;
 		case 7:
 			//View assesments for member
+			System.out.println("Please enter Email");
+			 getStringOption();
+			String emailentered = getStringOption();
+			Member assessMember = gymApi.searchMembersByEmail(emailentered);
+			if(assessMember.getAssessments() == null){
+				System.out.println("No Assessment Data for this User");
+			}
+			else{
+			assessMember.latestAssessment().toString();
+			}
+			getStringOption();
+			runTrainerMenu(trainer);
+			break;
+		case 8:
+			exit();
 			break;
 		default:
 			this.optionError();
 		}
+	}
+	
+	public void addAssessment(Trainer trainer){
+		System.out.println("Please provide all relevant data");
+		getStringOption();
+		
+		Member member = null;
+		boolean validMember = false;
+		while(!validMember){
+		System.out.println("Member email");
+		member = (Member) gymApi.searchMembersByEmail(getStringOption());
+		if(member != null){
+			validMember = true;
+		  }
+		}
+		
+		System.out.println("Weight(KG)");
+		double weight = getDoubleOption();
+		
+		System.out.println("Chest (M)");
+		double chest = getDoubleOption();
+		
+		System.out.println("Thigh (M)");
+		double thigh = getDoubleOption();
+		
+		System.out.println("Upper Arm (M");
+		double upperArm = getDoubleOption();
+		
+		System.out.println("Waist (M)");
+		double waist = getDoubleOption();
+		
+		System.out.println("Hips (M)");
+		double hips = getDoubleOption();
+		
+		getStringOption();
+		System.out.println("Comment");
+		String comment = getStringOption();
+		
+		member.addAssessment(new Assessment(weight, chest, thigh, upperArm, waist, hips, comment, trainer));
 	}
 	
 	public int categoryMenu(){
@@ -380,16 +506,18 @@ public class Driver {
 		return str;
 	}
 	
-	public int memberMenu(){
+	public int memberMenu(Member member){
 		int option;
 		System.out.println("----Member Menu----");
-		System.out.println("View Profile");
-		System.out.println("Update Profile");
-		System.out.println("View Progress");
+		System.out.println("----Welcome " + member.getName() + "----");
+		System.out.println(" 1) View Profile");
+		System.out.println(" 2) Update Profile");
+		System.out.println(" 3) View Progress");
+		System.out.println(" 4) Exit");
 		option = 0;
-		while(option < 1 || option > 3){
+		while(option < 1 || option > 4){
 			option = getIntOption();
-			if(option < 1 || option > 3){
+			if(option < 1 || option > 4){
 				this.optionError();
 			}
 		}
@@ -397,21 +525,88 @@ public class Driver {
 	}
 	
 	public void runMemberMenu(Member member){
-		int option = memberMenu();
+		
+		int option = memberMenu(member);
 		switch(option){
 		case 1:
-			System.out.println(member);
+			System.out.println(member.toString());
+			getStringOption();
+			runMemberMenu(member);
 			break;
 		case 2:
-			//Update profile
+			updateProfile(member);
+			getStringOption();
+			runMemberMenu(member);
 			break;
 		case 3:
 			//view progress
+			if(member.getAssessments() == null){
+				System.out.println("No Assessment data");
+			}
+			else{
+			member.latestAssessment();
+			}
+			getStringOption();
+			runMemberMenu(member);
+			break;
+		case 4:
+			exit();
+			// exit
 			break;
 		default:
 			this.optionError();
 		}
 		
+	}
+	
+	public void updateProfile(Member member){
+		System.out.println("Update profile");
+		getStringOption();
+		
+		System.out.println("New Name");
+		member.setName(getStringOption());
+		
+		System.out.println("New Email");
+		member.setEmail(getStringOption());
+		
+		System.out.println("New Address");
+		member.setAddress(getStringOption());
+		
+		int genderOption;
+		System.out.println("New Gender");
+		System.out.println(" 1) Male");
+		System.out.println(" 2 Female");
+		System.out.println(" 3) Other");
+		genderOption = 0;
+		String gender = "U";
+		while(genderOption < 1 || genderOption > 3){
+			genderOption = getIntOption();
+			if(genderOption > 1 || genderOption < 3){
+				if(genderOption == 1){
+					gender = "M";
+				}
+				else if(genderOption == 2){
+					gender = "F";
+				}
+				else if(genderOption == 3){
+					gender = "U";
+				}
+			}
+		}
+		
+		member.setGender(gender);
+		
+		System.out.println("New Height");
+		member.setHeight(getDoubleOption());
+	}
+	
+	public void exit(){
+		try {
+			gymApi.save();
+		} catch (Exception e) {
+			System.out.println("Error while saving");
+		}
+		runStart();
 	}
 	
 	

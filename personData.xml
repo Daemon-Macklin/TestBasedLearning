@@ -1,0 +1,33 @@
+<object-stream>
+  <list>
+    <StudentMember>
+      <name>Daemon</name>
+      <email>daemon1@live.ca</email>
+      <address>Waterford</address>
+      <gender>M</gender>
+      <height>1.5</height>
+      <startingWeight>76.0</startingWeight>
+      <studentId>200756</studentId>
+      <collegeName>WIT</collegeName>
+      <chosenPackage>WIT</chosenPackage>
+    </StudentMember>
+    <PremiumMember>
+      <name>test</name>
+      <email>cool</email>
+      <address>123</address>
+      <gender>F</gender>
+      <height>1.4</height>
+      <startingWeight>67.0</startingWeight>
+      <packageChosen>Package 3</packageChosen>
+    </PremiumMember>
+  </list>
+  <list>
+    <Trainer>
+      <name>Daemon</name>
+      <email>daemon1@live.ca</email>
+      <address>Waterford</address>
+      <gender>M</gender>
+      <speciality>Running</speciality>
+    </Trainer>
+  </list>
+</object-stream>

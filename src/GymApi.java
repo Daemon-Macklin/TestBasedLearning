@@ -1,3 +1,10 @@
+/**
+ * GymApi Class
+ * 
+ * @author Daemon-Macklin 20075689
+ *
+ */
+
 import java.util.ArrayList;
 import java.io.*;
 import com.thoughtworks.xstream.XStream;
@@ -60,10 +67,10 @@ public class GymApi {
 	}
 	
 	public Member searchMembersByEmail(String emailEntered){
-		members = this.getMembers();
+		ArrayList<Member> members = this.getMembers();
 		Member memberWanted = null;
 		for(int i = 0; i < members.size(); i++){
-			if(members.get(i).getEmail() == emailEntered){
+			if(members.get(i).getEmail().equals(emailEntered)){
 			 memberWanted = members.get(i);
 			} 
 		  }
@@ -71,9 +78,10 @@ public class GymApi {
 	}
 	
 	public Person searchTrainersByEmail(String emailEntered){
+		ArrayList<Trainer> trainers = this.getTrainers();
 		Trainer trainerWanted = null;
 		for(int i = 0; i < trainers.size(); i++){
-			if(trainers.get(i).getEmail() == emailEntered){
+			if(trainers.get(i).getEmail().equals(emailEntered)){
 			 trainerWanted = trainers.get(i);
 			} 
 		}
@@ -90,12 +98,17 @@ public class GymApi {
 	}
 	
 	public String listMembersWithIdealWeight(){
-		members = this.getMembers();
+		ArrayList<Member> members = this.getMembers();
+
 		String str = "";
 		for(int i = 0; i < members.size(); i++){
 			Member person = members.get(i);
+			if(person.getAssessments() ==null) {
+				System.out.println("Not enough Data to complete. Add assesment");
+			}
+			else{
 			double memberWeight = person.latestAssessment().getWeight();
-			if(person.getGender() == "m"){
+			if(person.getGender() == "M"){
 				double extraWeight = 0;
 				double heightIN = person.getHeight()/.0254;
 				double extraHeight = heightIN - 60;
@@ -107,7 +120,7 @@ public class GymApi {
 					str = str + person;
 				}
 			}
-			else if(person.getGender() == "f"){
+			else if(person.getGender() == "F" || person.getGender() == "U"){
 				double extraWeight = 0;
 				double heightIN = person.getHeight()/.0254;
 				double extraHeight = heightIN - 60;
@@ -119,30 +132,34 @@ public class GymApi {
 					str = str + person;
 				}
 			}
-			else if(person.getGender() == "Unspecified"){
-				str = "Unavaliable";
-			}
 		}
+	}
 		return str;
 	}
 	
 	public String listMembersBySpecificeBMICategory(String category){
-		members = this.getMembers();
+		ArrayList<Member> members = this.getMembers();
 		String str = "";
 		for(int i = 0; i < members.size(); i++){
 			Member person = members.get(i);
+			if(person.getAssessments() == null) {
+				str = "Not enough Data to complete. Add assesment";
+			}
+			else{
 			double memberWeight = person.latestAssessment().getWeight();
 			double bmiValue = members.get(i).calculateBMI(memberWeight);
 			String BMICat = members.get(i).determineBMICategory(bmiValue);
 			if(BMICat == category){
 				str = str + " " + members.get(i);
 			}
+		  }
 		}
 		return str;
 	}
+		
 	
 	public String listMemberDetailsImperialAndMetric(){
-		members = this.getMembers();
+		ArrayList<Member> members = this.getMembers();
 		String str = "";
 			for(int i = 0; i < members.size(); i++){
 				Member person = members.get(i);

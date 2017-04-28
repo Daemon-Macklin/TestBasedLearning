@@ -1,3 +1,9 @@
+/**
+ * Premium Member Class
+ * 
+ * @author Daemon-Macklin 20075689
+ *
+ */
 
 public class PremiumMember extends Member {
 	

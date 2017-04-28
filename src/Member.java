@@ -1,3 +1,10 @@
+/**
+ * Member Class
+ * 
+ * @author Daemon-Macklin 20075689
+ *
+ */
+
 import java.util.HashMap;
 import java.util.Date;
 import java.util.SortedSet;
@@ -14,6 +21,7 @@ public abstract class Member extends Person {
 		super(email, name, address, gender);
 		this.setHeight(height);
 		this.setStartingWeight(startingWeight);
+		assessments = new HashMap <Date, Assessment>();
 	}
 	
 	public String toString(){
@@ -56,6 +64,11 @@ public abstract class Member extends Person {
 			  str = "Very Severely Obese";
 		  }
 			return str;
+	}
+	
+	public void addAssessment(Assessment newAssessment) {
+		//error happens here
+		assessments.put(new Date(), newAssessment);
 	}
 	
 	public Assessment latestAssessment(){
@@ -108,6 +121,7 @@ public abstract class Member extends Person {
 	public double getStartingWeight(){
 		return startingWeight;
 	}
+	
 	
 	public HashMap<Date, Assessment> getAssessments(){
 		return assessments;

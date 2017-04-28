@@ -1,3 +1,10 @@
+/**
+ * StudentMember Class 
+ * 
+ * @author Daemon-Macklin 20075689
+ *
+ */
+
 import java.util.Date;
 import java.util.HashMap;
 

@@ -1,3 +1,9 @@
+/**
+ * Person Class
+ * 
+ * @author Daemon-Macklin 20075689
+ *
+ */
 
 public abstract class Person {
 //email
