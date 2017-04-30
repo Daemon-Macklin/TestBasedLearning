@@ -3,11 +3,36 @@
     <StudentMember>
       <name>Daemon</name>
       <email>daemon1@live.ca</email>
-      <address>Waterford</address>
+      <address>123 street </address>
       <gender>M</gender>
-      <height>1.5</height>
+      <height>1.6</height>
       <startingWeight>76.0</startingWeight>
-      <studentId>200756</studentId>
+      <assessments>
+        <entry>
+          <date>2017-04-30 19:57:58.221 UTC</date>
+          <null/>
+        </entry>
+        <entry>
+          <date>2017-04-30 20:17:13.984 UTC</date>
+          <Assessment>
+            <weight>76.0</weight>
+            <chest>0.8</chest>
+            <thigh>0.5</thigh>
+            <upperArm>0.4</upperArm>
+            <waist>1.0</waist>
+            <hips>1.0</hips>
+            <comment>fool</comment>
+            <trainer>
+              <name>Daemon</name>
+              <email>daemon1@live.ca</email>
+              <address>123 street </address>
+              <gender>M</gender>
+              <speciality>Running</speciality>
+            </trainer>
+          </Assessment>
+        </entry>
+      </assessments>
+      <studentId>200567</studentId>
       <collegeName>WIT</collegeName>
       <chosenPackage>WIT</chosenPackage>
     </StudentMember>
@@ -16,16 +41,22 @@
       <email>cool</email>
       <address>123</address>
       <gender>F</gender>
-      <height>1.4</height>
-      <startingWeight>67.0</startingWeight>
-      <packageChosen>Package 3</packageChosen>
+      <height>1.0</height>
+      <startingWeight>55.0</startingWeight>
+      <assessments>
+        <entry>
+          <date>2017-04-30 20:33:04.552 UTC</date>
+          <null/>
+        </entry>
+      </assessments>
+      <packageChosen>Package 2</packageChosen>
     </PremiumMember>
   </list>
   <list>
     <Trainer>
       <name>Daemon</name>
       <email>daemon1@live.ca</email>
-      <address>Waterford</address>
+      <address>123 street </address>
       <gender>M</gender>
       <speciality>Running</speciality>
     </Trainer>

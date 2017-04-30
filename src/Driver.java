@@ -12,16 +12,26 @@ public class Driver {
 	public Scanner input;
 	public GymApi gymApi;
 	
+	/**
+	 * Main method, program sarts here
+	 * @param args
+	 */
 	public static void main(String[] args){
 		Driver gym = new Driver();
 		gym.load();
 	}
 	
+	/**
+	 * Driver constructor
+	 */
 	public Driver(){
 		input = new Scanner(System.in);
 		this.gymApi = new GymApi();
 	}
 	
+	/**
+	 * Loads data from xml then starts start menu
+	 */
 	public void load(){
 		try {
 			gymApi.load();
@@ -31,6 +41,10 @@ public class Driver {
 		this.runStart();
 	}
 	
+	/**
+	 * Start menu
+	 * @return int option for menu runner
+	 */
 	public int start(){
 		int option; 
 		System.out.println("----Welcome to Good Life Fitness----");
@@ -47,6 +61,9 @@ public class Driver {
 		return option;
 	}
 	
+	/**
+	 * Method that runs the start menu where the other methods are kicked off from
+	 */
 	public void runStart(){
 		int option = start();
 		
@@ -65,6 +82,10 @@ public class Driver {
 			}
 		}
 	
+	/**
+	 * Menu for person choice
+	 * @return int option for menu runner
+	 */
 	public int personChoice(){
 		int option;
 		System.out.println("Are you a trainer or member?");
@@ -80,6 +101,9 @@ public class Driver {
 		return option;
 	}
 	
+	/**
+	 * Runner for person choice menu
+	 */
 	public void runPersonChoice(){
 		int option = personChoice();
 		
@@ -97,16 +121,20 @@ public class Driver {
 		}
 	}
 	
+	/**
+	 * Method that takes an email, checks if it's valid then starts the Member Method
+	 */
 	public void loginTrainer(){
 		boolean valid = false;
 		while(!valid){
 		String email = "";
-		System.out.println("Please enter your Email");
 		getStringOption();
+		System.out.println("Please enter your Email");
 		email = getStringOption();
 		Trainer trainer = (Trainer) gymApi.searchTrainersByEmail(email);
 		if(trainer == null){
 			System.out.println("Access denied");
+			this.runStart();
 		}
 		else{
 			System.out.println("Welcome " + trainer.getName());
@@ -116,16 +144,20 @@ public class Driver {
 	}
 	}
 	
+	/**
+	 * Method that takes an email, checks if it's valid then starts the Member Method
+	 */
 	public void loginMember(){
 		boolean valid = false;
 		while(!valid){
 		String email = "";
-		System.out.println("Please enter your Email");
 		getStringOption();
+		System.out.println("Please enter your Email");
 		email = getStringOption();
 		Member member = (Member) gymApi.searchMembersByEmail(email);
 		if(member == null){
 			System.out.println("Access denied");
+			this.runStart();
 		}
 		else{
 			System.out.println("Welcome " + member.getName());
@@ -135,6 +167,10 @@ public class Driver {
 	  }
 	}
 	
+	/**
+	 * Register menu
+	 * @return option for menu runner
+	 */
 	public int register(){
 		int option;
 		System.out.println("New Member or Trainer?");
@@ -150,6 +186,9 @@ public class Driver {
 		return option;
 	}
 	
+	/**
+	 * Runner for register menu
+	 */
 	public void runRegister(){
 		int option = this.register();
 		
@@ -168,11 +207,20 @@ public class Driver {
 		}
 	}
 	
+	/**
+	 * Method that gets all the trainers data then sends to new trainer class
+	 */
 	public void registerTrainer(){
 		System.out.println("email");
 		getStringOption();
-		String email = getStringOption();
-		
+		String email = "";
+		boolean validEmail = false;
+		while(!validEmail){
+		email = getStringOption();
+			if(gymApi.searchMembersByEmail(email) == null && email != ""){
+				validEmail = true;
+			}
+		}
 		System.out.println("Name");
 		String name = getStringOption();
 		
@@ -212,15 +260,26 @@ public class Driver {
 		} catch (Exception e) {
 			System.out.println("Error while saving");
 		}
+		getStringOption();
 		this.loginTrainer();
 	}
 	
+	/**
+	 * Method that gets all Member data then sends to Member class
+	 */
 	public void registerMember(){
 		System.out.println("----Register Member----");
 		getStringOption();
 		
 		System.out.println("email");
-		String email = getStringOption();
+		String email = "";
+		boolean validEmail = false;
+		while(!validEmail){
+		email = getStringOption();
+			if(gymApi.searchMembersByEmail(email) == null && email != ""){
+				validEmail = true;
+			}
+		}
 		
 		System.out.println("Name");
 		String name = getStringOption();
@@ -288,9 +347,14 @@ public class Driver {
 		} catch (Exception e) {
 			System.out.println("Error while saving");
 		}
+		getStringOption();
 		return;
 	}
 	
+	/**
+	 * Package selection menu
+	 * @return int option for menu runner
+	 */
 	public int packageMenu(){
 		int option;
 		System.out.println("----Please select a package----");
@@ -307,6 +371,10 @@ public class Driver {
 		return option;
 	}
 	
+	/**
+	 * runner for package menu
+	 * @return Chosen package 
+	 */
 	public String runPackage(){
 		int option = packageMenu();
 		String str;
@@ -327,12 +395,16 @@ public class Driver {
 		}
 	}
 	
+	/**
+	 * Trainer menu
+	 * @return int option for runner
+	 */
 	public int trainerMenu(){
 		int option;
 		System.out.println("---Trainer Menu---");
 		System.out.println(" 1) Add Member");
 		System.out.println(" 2) List all Members");
-		System.out.println(" 3) List all Members with ideal body weight");
+		System.out.println(" 3) Check if Member has ideal body weight");
 		System.out.println(" 4) List all Members with specific BMI category");
 		System.out.println(" 5) Search Member by email");
 		System.out.println(" 6) Add an assessment for a member");
@@ -348,6 +420,10 @@ public class Driver {
 		return option;
 	}
 	
+	/**
+	 * Runner of trainer menu
+	 * @param trainer 
+	 */
 	public void runTrainerMenu(Trainer trainer){
 		int option = trainerMenu();
 		
@@ -364,8 +440,8 @@ public class Driver {
 			runTrainerMenu(trainer);
 			 break;
 		case 3:
-			// List members with Ideal weight
-			System.out.println(gymApi.listMembersWithIdealWeight());
+			// Check if member has Ideal weight
+			System.out.println(idealWeight());
 			getStringOption();
 			runTrainerMenu(trainer);
 			break;
@@ -387,6 +463,11 @@ public class Driver {
 		case 6:
 			//add assessment
 			addAssessment(trainer);
+			try {
+				gymApi.save();
+			} catch (Exception e) {
+				System.out.println("Error whiling saving");
+			}
 			runTrainerMenu(trainer);
 			break;
 		case 7:
@@ -399,7 +480,7 @@ public class Driver {
 				System.out.println("No Assessment Data for this User");
 			}
 			else{
-			assessMember.latestAssessment().toString();
+			System.out.println(assessMember.latestAssessment().toString());
 			}
 			getStringOption();
 			runTrainerMenu(trainer);
@@ -412,6 +493,33 @@ public class Driver {
 		}
 	}
 	
+	/**
+	 * 
+	 */
+	public String idealWeight(){
+		System.out.println("Please enter Members weight");
+		Double weight = getDoubleOption();
+		getStringOption();
+		System.out.println("Please enter Email");
+		String email = getStringOption();
+		Member member = gymApi.searchMembersByEmail(email);
+		if(member != null){
+			if(member.isIdealBodyWeight(weight)){
+				return "Member has ideal body weight";
+			}
+			else{
+				return "Member does not have ideal body weight";
+			}
+		}
+		else{
+			return "Not valid user";
+		}
+	}
+	
+	/**
+	 * Method to add assessment for a member
+	 * @param trainer
+	 */
 	public void addAssessment(Trainer trainer){
 		System.out.println("Please provide all relevant data");
 		getStringOption();
@@ -435,7 +543,7 @@ public class Driver {
 		System.out.println("Thigh (M)");
 		double thigh = getDoubleOption();
 		
-		System.out.println("Upper Arm (M");
+		System.out.println("Upper Arm (M)");
 		double upperArm = getDoubleOption();
 		
 		System.out.println("Waist (M)");
@@ -451,6 +559,10 @@ public class Driver {
 		member.addAssessment(new Assessment(weight, chest, thigh, upperArm, waist, hips, comment, trainer));
 	}
 	
+	/**
+	 *  Member wit BMI Category menu
+	 * @return
+	 */
 	public int categoryMenu(){
 		int option;
 		System.out.println("----Select BMI Category");
@@ -472,6 +584,10 @@ public class Driver {
 		return option;
 	}
 	
+	/**
+	 * BMI catergory menu runner
+	 * @return
+	 */
 	public String runCategoryMenu(){
 		int option = categoryMenu();
 		String str = "";
@@ -506,6 +622,11 @@ public class Driver {
 		return str;
 	}
 	
+	/**
+	 * Member menu
+	 * @param member
+	 * @return int option for runner
+	 */
 	public int memberMenu(Member member){
 		int option;
 		System.out.println("----Member Menu----");
@@ -524,6 +645,10 @@ public class Driver {
 		return option;
 	}
 	
+	/**
+	 * Runner for member menu
+	 * @param member
+	 */
 	public void runMemberMenu(Member member){
 		
 		int option = memberMenu(member);
@@ -559,6 +684,10 @@ public class Driver {
 		
 	}
 	
+	/**
+	 * Method to update profile
+	 * @param member
+	 */
 	public void updateProfile(Member member){
 		System.out.println("Update profile");
 		getStringOption();
@@ -593,13 +722,22 @@ public class Driver {
 				}
 			}
 		}
-		
 		member.setGender(gender);
 		
 		System.out.println("New Height");
 		member.setHeight(getDoubleOption());
+		
+		try {
+			gymApi.save();
+		} catch (Exception e) {
+			System.out.println("Error whiling saving");
+		}
 	}
 	
+	/**
+	 * Method to exit program
+	 * Saves and returns to login screen
+	 */
 	public void exit(){
 		try {
 			gymApi.save();
@@ -611,24 +749,39 @@ public class Driver {
 	
 	
 	//utility funcions
+	/**
+	 * Method to get a String with scanner
+	 * @return
+	 */
 	private String getStringOption() {
 	      System.out.print("> ");
 	      String text = input.nextLine();
 	      return text;
 	  }
 	
+	/**
+	 * Method to get double with scanner 
+	 * @return
+	 */
 	private double getDoubleOption(){
 		System.out.println("> ");
 		double option = input.nextDouble();
 		return option;
 	}
 	
+	/**
+	 * Method to get int with scanner
+	 * @return
+	 */
 	private int getIntOption(){
 		System.out.println("> ");
 		int option = input.nextInt();
 		return option;
 	}
 	
+	/**
+	 * Method that prints error message when invalid option is selected
+	 */
 	public void optionError(){
 		System.out.println("Invalid option selected");
 	}

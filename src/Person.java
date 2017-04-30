@@ -1,5 +1,6 @@
 /**
- * Person Class
+ * Person Class super class for both 
+ * members and trainers
  * 
  * @author Daemon-Macklin 20075689
  *
@@ -15,6 +16,13 @@ public abstract class Person {
 	private String address;
 	private String gender; 
 	
+	/**
+	 * Constructor for person class
+	 * @param email Persons email
+	 * @param name Persons name
+	 * @param address Persons address
+	 * @param gender Persons gender
+	 */
 	public Person(String email, String name, String address, String gender){
 		this.setEmail(email);
 		this.setName(name);
@@ -22,6 +30,9 @@ public abstract class Person {
 		this.setGender(gender);
 	}
 	
+	/**
+	 * toString for all the persons data
+	 */
 	public String toString(){
 	return ("StudentMember [" +
 			"Email: " + this.getEmail() + 
@@ -30,6 +41,10 @@ public abstract class Person {
 			", Address:" + this.getAddress() + "."); 
 	}
 	
+	/**
+	 * Setter for persons name with validation for length of name
+	 * @param name
+	 */
 	public void setName(String name){
 		if(this.name == null){
 		int maxLength = (name.length() < 30)?name.length():30;
@@ -44,14 +59,26 @@ public abstract class Person {
 		
 	}
 	
+	/**
+	 * Setter for email
+	 * @param email
+	 */
 	public void setEmail(String email){
 		this.email = email;
 	}
 	
+	/**
+	 * Setter for address
+	 * @param address
+	 */
 	public void setAddress(String address){
 		this.address = address;
 	}
 	
+	/**
+	 * Setter for gender with validation
+	 * @param gender
+	 */
 	public void setGender(String gender){
 		if(this.gender == null){
 		String finalgender = "";
@@ -78,18 +105,34 @@ public abstract class Person {
 		}
 	}
 	
+	/**
+	 * Getter for name
+	 * @return Persons name
+	 */
 	public String getName(){
 		return this.name;
 	}
 	
+	/**
+	 * Getter for email
+	 * @return Persons email
+	 */
 	public String getEmail(){
 		return this.email;
 	}
 	
+	/**
+	 * Getter for address
+	 * @return Persons address
+	 */
 	public String getAddress(){
 		return this.address;
 	}
 	
+	/**
+	 * Getter for gender
+	 * @return Persons gender 
+	 */
 	public String getGender(){
 		return this.gender;
 	}
