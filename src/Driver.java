@@ -570,7 +570,7 @@ public class Driver {
 		System.out.println(" 2) Severely Underweight");
 		System.out.println(" 3) Underweight");
 		System.out.println(" 4) Normal");
-		System.out.println(" 5) Overweight");
+		System.out.println(" 5) OverWeight");
 		System.out.println(" 6) Moderatly Obese");
 		System.out.println(" 7) Severely Obese");
 		System.out.println(" 8) Very Severely Obese");
@@ -605,7 +605,7 @@ public class Driver {
 			str = "Normal";
 			break;
 		case 5:
-			str = "Overweight";
+			str = "OverWeight";
 			break;
 		case 6:
 			str = "Moderatly Obese";

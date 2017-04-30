@@ -250,8 +250,7 @@ public class GymApi {
 			double bmiValue = person.calculateBMI(memberWeight);
 			String BMICat = person.determineBMICategory(bmiValue);
 			System.out.println("Category = " + category + "BMICAT = " + BMICat);
-			if(BMICat.equals(category)){
-				System.out.println("HEYIHHHAA");
+			if(category.equals(BMICat)){
 				str = str + " " + person;
 			}
 		  }
