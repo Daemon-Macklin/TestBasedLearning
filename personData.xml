@@ -51,6 +51,21 @@
       </assessments>
       <packageChosen>Package 2</packageChosen>
     </PremiumMember>
+    <PremiumMember>
+      <name>test</name>
+      <email></email>
+      <address>123</address>
+      <gender>M</gender>
+      <height>2.0</height>
+      <startingWeight>99.0</startingWeight>
+      <assessments>
+        <entry>
+          <date>2017-05-01 02:52:22.636 UTC</date>
+          <null/>
+        </entry>
+      </assessments>
+      <packageChosen>Package 2</packageChosen>
+    </PremiumMember>
   </list>
   <list>
     <Trainer>

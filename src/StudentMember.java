@@ -41,10 +41,10 @@ public class StudentMember extends Member {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + ", StudentId=" + this.getStudentId() + 
+		return ("StudentMember [" + super.toString() + ", StudentId=" + this.getStudentId() + 
 	            " , College Name=" + this.getCollegeName() + 
 	            ", Chosen Package=" + this.getChosenPackage()
-	            + "]" ;        
+	            + "]" );        
 	}
 	
 	/**

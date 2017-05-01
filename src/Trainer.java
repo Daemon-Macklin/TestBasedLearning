@@ -46,6 +46,6 @@ public class Trainer extends Person{
 	 * toString for returning all the trainers data
 	 */
 	public String toString(){
-	return super.toString() +  ", Speciality:" + this.getSpeciality();
+	return "Trainer [" + super.toString() +  ", Speciality:" + this.getSpeciality();
 	}
 }

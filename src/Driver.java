@@ -137,7 +137,7 @@ public class Driver {
 			this.runStart();
 		}
 		else{
-			System.out.println("Welcome " + trainer.getName());
+			System.out.println("Welcome " + trainer.getName() + "----");
 			this.runTrainerMenu(trainer);
 			valid = true;
 		}
@@ -160,7 +160,7 @@ public class Driver {
 			this.runStart();
 		}
 		else{
-			System.out.println("Welcome " + member.getName());
+			System.out.println("----Welcome " + member.getName() + "----");
 			this.runMemberMenu(member);
 			valid = true;
 		}
@@ -565,7 +565,7 @@ public class Driver {
 	 */
 	public int categoryMenu(){
 		int option;
-		System.out.println("----Select BMI Category");
+		System.out.println("----Select BMI Category----");
 		System.out.println(" 1) Very Severely Underweight");
 		System.out.println(" 2) Severely Underweight");
 		System.out.println(" 3) Underweight");

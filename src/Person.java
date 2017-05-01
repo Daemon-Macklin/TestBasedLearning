@@ -34,8 +34,7 @@ public abstract class Person {
 	 * toString for all the persons data
 	 */
 	public String toString(){
-	return ("StudentMember [" +
-			"Email: " + this.getEmail() + 
+	return	("Email: " + this.getEmail() + 
 			", Name:" + this.getName() + 
 			" (" + this.getGender() + ")" + 
 			", Address:" + this.getAddress() + "."); 

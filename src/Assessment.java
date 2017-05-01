@@ -41,14 +41,15 @@ public class Assessment {
 		this.setComment(comment);
 		this.setTrainer(trainer);
 	}
-	
+
 	/**
 	 * toString returning all assessment data 
 	 */
-	@Override
 	public String toString() {
-		return "Assessment [weight=" + this.getWeight() + ", chest=" + this.getChest() + ", thigh=" + this.getThigh() + ", upperArm=" + this.getUpperArm()
-				+ ", waist=" + this.getWaist() + ", hips=" + this.getHips() + ", comment=" + this.getComment() + ", trainer=" + this.getTrainer().getName() + "]";
+		return "Assessment [weight=" + this.getWeight() + ", chest=" + this.getChest() + 
+				", thigh=" + this.getThigh() + ", upperArm=" + this.getUpperArm()
+				+ ", waist=" + this.getWaist() + ", hips=" + this.getHips() + ", comment="
+				+ this.getComment() + ", trainer=" + this.getTrainer() + "]";
 	}
 	
 	/**
@@ -64,8 +65,18 @@ public class Assessment {
 	 * @param weight in kg
 	 */
 	public void setWeight(double weight) {
+		if(this.weight == 0){
 		if(weight > 35 && weight < 250){
 		this.weight = weight;
+		}
+		else{
+			this.weight = 35;
+		}
+		}
+		else{
+			if(weight > 35 && weight < 250){
+				this.weight = weight;
+				}
 		}
 	}
 	
