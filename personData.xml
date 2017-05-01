@@ -66,6 +66,21 @@
       </assessments>
       <packageChosen>Package 2</packageChosen>
     </PremiumMember>
+    <PremiumMember>
+      <name>Jon</name>
+      <email>Jon</email>
+      <address>Dublin</address>
+      <gender>M</gender>
+      <height>2.0</height>
+      <startingWeight>100.0</startingWeight>
+      <assessments>
+        <entry>
+          <date>2017-05-01 12:11:10.740 UTC</date>
+          <null/>
+        </entry>
+      </assessments>
+      <packageChosen>Package 3</packageChosen>
+    </PremiumMember>
   </list>
   <list>
     <Trainer>

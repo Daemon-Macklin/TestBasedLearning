@@ -51,10 +51,11 @@ public class Driver {
 		System.out.println("----Would you like to login or register----");
 		System.out.println(" 1) Login");
 		System.out.println(" 2) Register");
+		System.out.println(" 3) End");
 		option = 0;
-		while(option < 1 || option > 2){
+		while(option < 1 || option > 3){
 			option = getIntOption();
-			if(option < 1 || option > 2){
+			if(option < 1 || option > 3){
 				this.optionError();
 			}
 		}
@@ -76,6 +77,10 @@ public class Driver {
 			//register
 			this.runRegister();
 			break;
+		case 3:
+			//end
+			 System.exit(0);
+			 break;
 		default:
 			this.optionError();
 			break;
@@ -160,7 +165,6 @@ public class Driver {
 			this.runStart();
 		}
 		else{
-			System.out.println("----Welcome " + member.getName() + "----");
 			this.runMemberMenu(member);
 			valid = true;
 		}
@@ -336,6 +340,7 @@ public class Driver {
 					gymApi.addMember(new StudentMember(email, name, address, gender, height, weight, studentId, collegeName, collegeName));
 				}
 				else if(memberOption == 2){
+					System.out.println("----Permium Member----");
 					String chosenPackage = runPackage();
 					
 					gymApi.addMember(new PremiumMember(email, name, address, gender, height, weight, chosenPackage));
@@ -455,8 +460,9 @@ public class Driver {
 		case 5:
 			//search members by email
 			System.out.println("Please enter Email");
+			getStringOption();
 			String email = getStringOption();
-			gymApi.searchMembersByEmail(email);
+			System.out.println(gymApi.searchMembersByEmail(email));
 			getStringOption();
 			runTrainerMenu(trainer);
 			break;
@@ -669,7 +675,7 @@ public class Driver {
 				System.out.println("No Assessment data");
 			}
 			else{
-			member.latestAssessment();
+				System.out.println(member.latestAssessment());
 			}
 			getStringOption();
 			runMemberMenu(member);
